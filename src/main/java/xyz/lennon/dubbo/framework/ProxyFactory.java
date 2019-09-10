@@ -2,10 +2,11 @@ package xyz.lennon.dubbo.framework;
 
 import xyz.lennon.dubbo.protocol.http.HttpClient;
 import xyz.lennon.dubbo.provider.api.HelloService;
-
+import xyz.lennon.dubbo.register.RemoteMapRegister;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import java.util.List;
 
 public class ProxyFactory<T> {
 
@@ -18,7 +19,9 @@ public class ProxyFactory<T> {
                         , method.getName()
                         , new Class[]{String.class}
                         , args);
-                String result = httpClient.send("localhost", 8080, invocation);
+                List<URL> list = RemoteMapRegister.get(interfaceClass.getClass().getName());
+                URL url = LoadBalance.random(list);
+                String result = httpClient.send(url.getHostname(), url.getPort(), invocation);
                 return result;
             }
         });
