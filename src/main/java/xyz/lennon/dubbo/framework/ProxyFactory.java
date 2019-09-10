@@ -22,6 +22,7 @@ public class ProxyFactory<T> {
                         , new Class[]{String.class}
                         , args);
                 List<URL> list = RemoteMapRegister.get(interfaceClass.getClass().getName());
+                // !  java.lang.NullPointerException  2 process remoteRegister diff
                 URL url = LoadBalance.random(list);
 //                return httpClient.send(url.getHostname(), url.getPort(), invocation);
                 return protocol.send(url, invocation);
