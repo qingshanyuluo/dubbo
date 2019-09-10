@@ -14,15 +14,17 @@ public class ProxyFactory<T> {
         return (T) Proxy.newProxyInstance(interfaceClass.getClassLoader(), new Class[]{interfaceClass}, new InvocationHandler() {
             @Override
             public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-                HttpClient httpClient = new HttpClient();
+//                HttpClient httpClient = new HttpClient();
+                //use protocol
+                Protocol protocol = ProtocolFactory.getProtocol();
                 Invocation invocation = new Invocation(HelloService.class.getName()
                         , method.getName()
                         , new Class[]{String.class}
                         , args);
                 List<URL> list = RemoteMapRegister.get(interfaceClass.getClass().getName());
                 URL url = LoadBalance.random(list);
-                String result = httpClient.send(url.getHostname(), url.getPort(), invocation);
-                return result;
+//                return httpClient.send(url.getHostname(), url.getPort(), invocation);
+                return protocol.send(url, invocation);
             }
         });
     }
