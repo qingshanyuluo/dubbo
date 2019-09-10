@@ -13,9 +13,10 @@ public class ProtocolFactory {
             case "dubbo":
                 throw new RuntimeException("not yet completed");
             default:
-                return new HttpProtocal();
+//                return new HttpProtocal();
+                break;
         }
-//        throw  new RuntimeException("no protocol specified");
+        throw  new RuntimeException("no protocol specified");
     }
 
 
