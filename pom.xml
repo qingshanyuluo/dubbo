@@ -20,7 +20,7 @@
         </plugins>
     </build>
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-core -->
+        <!-- https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-core minbao-->
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-core</artifactId>
